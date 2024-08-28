@@ -3,7 +3,6 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 const User = require('../user')
-console.log('User資料:', User)
 
 const { faker } = require('@faker-js/faker')
 const bcrypt = require('bcrypt')
@@ -12,26 +11,44 @@ const mongoose = require('mongoose')
 mongoose.connect(process.env.MONGOOSE_URI)
 
 const db = mongoose.connection
-const hashedPassword = bcrypt.hash('12345678', 10)
 
-const userData = [
-  {
-    name: 'user1',
-    account: 'user1@example.com',
-    password: hashedPassword,
-    avatar: faker.image.avatar(),
-  },
-  {
-    name: 'user2',
-    account: 'user2@example.com',
-    password: hashedPassword,
-    avatar: faker.image.avatar(),
-  },
-]
-console.log('userData測試:', userData)
+async function createUserData() {
+  const usersArray = []
+  const hashedPassword = await bcrypt.hash('12345678', 10)
+  const users = [
+    {
+      name: 'user1',
+      account: 'user1@example.com',
+      password: hashedPassword,
+      avatar: faker.image.avatar(),
+    },
+    {
+      name: 'user2',
+      account: 'user2@example.com',
+      password: hashedPassword,
+      avatar: faker.image.avatar(),
+    },
+    {
+      name: 'user3',
+      account: 'user3@example.com',
+      password: hashedPassword,
+      avatar: faker.image.avatar(),
+    },
+  ]
+  usersArray.push(...users)
+  return usersArray
+}
 
 db.once('open', async () => {
-  console.log('mongodb connected and going to create userSeeder')
-  await User.create(userData)
-  console.log('userSeeder done')
+  try {
+    console.log('mongodb connected and going to create Seeder ...')
+
+    const usersData = await createUserData()
+
+    await User.create(usersData)
+    console.log('userSeeder done')
+    db.close()
+  } catch (error) {
+    console.error(`run groupSeeder is error: ${error}`)
+  }
 })
