@@ -8,9 +8,12 @@ if (process.env.NODE_ENV !== 'production') {
 const app = express()
 const PORT = 3000
 
-mongoose.connect(process.env.MONGOOSE_URI)
+const routes = require('./routes')
 
+mongoose.connect(process.env.MONGOOSE_URI)
 const db = mongoose.connection
+
+app.use(routes)
 
 db.on('error', () => {
   console.log('mongodb error!')
