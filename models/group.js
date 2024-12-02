@@ -10,7 +10,7 @@ const groupSchema = new Schema({
       lender: { type: String, required: true },
       borrower: { type: String, required: true },
       price: { type: Number, required: true },
-      time: { type: Date, default: Date.now },
+      time: { type: Date },
     },
   ],
 })

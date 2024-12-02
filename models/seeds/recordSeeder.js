@@ -18,8 +18,8 @@ db.once('open', async () => {
 
     const recordsArray = Array.from({ length: 5 }).map((v, index) => {
       const randomNumber = Math.floor(Math.random() * category.length)
-      const randomMonth = Math.floor(Math.random() * 2) // 希望日期過去隨機的2個月內
-      const randomDay = Math.floor(Math.random() * 10) // 希望日期過去隨機的10天內
+      const randomMonth = Math.floor(Math.random() * 2) // 希望日期是過去隨機的2個月內
+      const randomDay = Math.floor(Math.random() * 10) // 希望日期是過去隨機的10天內
 
       return {
         item: faker.lorem.word(),
