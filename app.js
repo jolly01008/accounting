@@ -5,7 +5,7 @@ const passport = require('passport')
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
-require('./config/passport')  // 確保 config/passport.js 被正確載入執行，從而註冊 local 策略到 Passport。
+require('./config/passport')
 
 const app = express()
 const PORT = 3000
