@@ -5,7 +5,7 @@ if (process.env.NODE_ENV !== 'production') {
 const User = require('../user')
 
 const { faker } = require('@faker-js/faker')
-const bcrypt = require('bcrypt')
+const bcryptjs = require('bcryptjs')
 
 const mongoose = require('mongoose')
 mongoose.connect(process.env.MONGOOSE_URI)
@@ -14,7 +14,7 @@ const db = mongoose.connection
 
 async function createUserData() {
   const usersArray = []
-  const hashedPassword = await bcrypt.hash('12345678', 10)
+  const hashedPassword = await bcryptjs.hash('12345678', 10)
   const users = [
     {
       name: 'user1',

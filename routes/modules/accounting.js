@@ -4,6 +4,6 @@ const accountingController = require('../../controllers/accounting-controller')
 const passport = require('passport')
 const authenticated = require('../../middleware/auth')
 
-router.post('/addRecord', authenticated, accountingController.addRecord)
+router.post('/:userId/:gpId/addRecord', authenticated, accountingController.addRecord)
 
 module.exports = router
