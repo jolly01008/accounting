@@ -8,17 +8,15 @@ const ExtractJwt = require('passport-jwt').ExtractJwt
 const jwtOptions = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
   secretOrKey: process.env.JWT_SECRET,
-  // issuer: 'accounts.examplesoft.com',
-  // audience: 'yoursite.net'
-  // passReqToCallback: true
+  passReqToCallback: true
 }
 
-passport.use(new JwtStrategy(jwtOptions, async function (jwtPayload, done) {
+passport.use(new JwtStrategy(jwtOptions, async function (req, jwtPayload, done) {
   try {
-    console.log('jwtPayload:', jwtPayload)
     const user = await User.findOne({ account: jwtPayload.account })
     if (user) {
-      // console.log('user:', user)
+      req.user = user
+
       return done(null, user);
     } else {
       return done(null, false);
