@@ -33,10 +33,14 @@ db.once('open', async () => {
         time: dayjs().subtract(3, 'month').format(),
       }
     })
+    const gpMembersName = firstTwoUser.map(user => {
+      return user.name
+    })
 
     const groupData = {
       gpName: faker.lorem.word(),
       gpCreater: firstTwoUser[0].name,
+      gpMembers: gpMembersName,
       gpRecord: gpRecordData,
     }
 
