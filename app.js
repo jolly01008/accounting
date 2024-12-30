@@ -1,6 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const passport = require('passport')
+const cors = require('cors')
 
 const { createServer } = require("http")
 const { Server } = require("socket.io")
@@ -11,7 +12,7 @@ if (process.env.NODE_ENV !== 'production') {
 require('./config/passport')
 
 const app = express()
-const PORT = 3000
+const PORT = 3001
 
 const router = require('./routes')
 const { connect } = require('./services/socketio')
@@ -21,7 +22,15 @@ const db = mongoose.connection
 
 const httpServer = createServer(app)
 
-const io = new Server(httpServer)
+app.use(cors({
+  origin: "http://localhost:3000"  // 允許的前端 URL
+}))
+
+const io = new Server(httpServer, {
+  cors: {
+    origin: 'http://localhost:3000'
+  }
+})
 
 connect(io)  // socket connect
 
@@ -38,6 +47,8 @@ db.once('open', () => {
   console.log('mongoDB connected!')
 })
 
-httpServer.listen(PORT, () => {
+httpServer.listen(PORT, '127.0.0.1', () => {
   console.log(`App is running on http://localhost:${PORT}`)
 })
+
+// 第二個參數 ('127.0.0.1'): 這指定了服務綁定的 IP 地址。
