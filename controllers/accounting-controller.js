@@ -64,6 +64,44 @@ const accountingController = {
     } catch (error) {
       next(error)
     }
+  }, putRecord: async (req, res, next) => {
+    try {
+      const { gpId, recordId } = req.params
+      const recordEditData = req.body
+
+      const group = await Group.findOne(
+        {
+          "_id": gpId,
+          "gpRecord._id": `${recordId}`
+        },
+        {
+          "gpRecord.$": 1  // 只返回符合條件的 gpRecord 元素
+        }
+      )
+      const oneRecord = group.gpRecord.find(record => String(record._id) === String(recordId))
+
+      const groupRenew = await Group.findOneAndUpdate(
+        {
+          "_id": gpId,
+          "gpRecord._id": `${recordId}`
+        },
+        {
+          $set: {
+            "gpRecord.$.item": recordEditData.item || oneRecord.item,
+            "gpRecord.$.lender": recordEditData.lender || oneRecord.lender,
+            "gpRecord.$.borrower": recordEditData.borrower || oneRecord.borrower,
+            "gpRecord.$.price": recordEditData.price || oneRecord.price,
+            "gpRecord.$.time": recordEditData.time || oneRecord.time
+          }
+        },
+        { new: true } // 返回更新後的文檔
+      )
+
+      res.json({ status: 'success', data: groupRenew })
+    }
+    catch (error) {
+      next(error)
+    }
   }
 }
 

@@ -31,7 +31,9 @@ const userController = {
       const user = await User.findById(userId).select('-password -__v')
       if (!user) throw new Error('找不到該使用者')
 
-      res.json({ status: 'success', data: user })
+      const groups = await Group.find({ gpCreater: user.name }).select('gpName gpMembers')
+
+      res.json({ status: 'success', userData: user, gpsData: groups })
     } catch (error) {
       next(error)
     }
