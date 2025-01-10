@@ -2,6 +2,14 @@ const Group = require('../models/group')
 const User = require('../models/user')
 
 const accountingController = {
+  // getRecord: async (req, res, next) => {
+  //   const { userId, gpId } = req.params
+  //   const records = await Group.find({
+  //     _id: gpId
+  //   })
+  //   console.log('records:', records)
+  //   res.json({ status: "success", records })
+  // },
   addRecord: async (req, res, next) => {
     try {
       const recordData = req.body
@@ -100,6 +108,33 @@ const accountingController = {
       res.json({ status: 'success', data: groupRenew })
     }
     catch (error) {
+      next(error)
+    }
+  }, deleteRecord: async (req, res, next) => {
+    try {
+
+      const { userId, gpId, recordId } = req.params
+      if (String(req.user._id) !== String(userId)) throw new Error('您沒有權限')
+
+      const deleteGroup = await Group.updateOne(
+        {
+          _id: gpId,
+          "gpRecord._id": recordId
+        },
+        {
+          $pull: {
+            gpRecord: { _id: recordId }  // 從 gpRecord 陣列中刪除符合條件的元素
+          }
+        }
+      )
+
+      const resultGroup = await Group.findById(gpId).select('-__v')
+
+      if (deleteGroup.acknowledged !== true || deleteGroup.modifiedCount === 0) throw new Error('刪除記錄失敗，發生了點錯誤')
+      if (!resultGroup) throw new Error('找不到這個群組，發生了點錯誤')
+
+      res.json({ status: "success", message: "已刪除該筆紀錄", data: resultGroup })
+    } catch (error) {
       next(error)
     }
   }
