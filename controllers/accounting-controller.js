@@ -2,14 +2,6 @@ const Group = require('../models/group')
 const User = require('../models/user')
 
 const accountingController = {
-  // getRecord: async (req, res, next) => {
-  //   const { userId, gpId } = req.params
-  //   const records = await Group.find({
-  //     _id: gpId
-  //   })
-  //   console.log('records:', records)
-  //   res.json({ status: "success", records })
-  // },
   addRecord: async (req, res, next) => {
     try {
       const recordData = req.body
@@ -20,6 +12,8 @@ const accountingController = {
       if (!currentUser) throw new Error('沒有找到該使用者')
       if (!group) throw new Error('沒有找到該群組')
       if (recordData.lender === recordData.borrower) throw new Error('借出者與欠款者不得為同一人')
+      if (!group.gpMembers.includes(recordData.lender)) throw new Error('提醒! 「借出者 Lender」 必須是群組的成員之一')
+      if (!group.gpMembers.includes(recordData.borrower)) throw new Error('提醒! 「借入者 Borrower」 必須是群組的成員之一')
 
       if (group.gpCreater.toString() !== currentUser.name.toString()) throw new Error('沒有權限! 目前的使用者，非該群組的創建者')
 

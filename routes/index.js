@@ -8,6 +8,7 @@ const { apiErrorHandler } = require('../middleware/error-handler')
 const userLogin = require('../middleware/login-handler')
 const accounting = require('../routes/modules/accounting')
 
+router.post('/users/register', userController.register)
 router.post('/users/login', userLogin, userController.login)
 router.use('/accounting', accounting)
 
