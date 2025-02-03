@@ -131,6 +131,32 @@ const accountingController = {
     } catch (error) {
       next(error)
     }
+  },
+  addGroup: async (req, res, next) => {
+    try {
+      const { userId } = req.params
+      const { gpName, gpMemberName } = req.body
+      const user = await User.findById(userId)
+      const addMember = await User.findOne({ name: gpMemberName })
+
+      if (String(user.name) === String(gpMemberName)) throw new Error('群組成員不能填寫自己')
+      if (!addMember) throw new Error('沒有這名使用者，請確認填寫的成員名字是否正確')
+      if (!gpMemberName) throw new Error('請填寫一名群組成員')
+      if (!gpName) throw new Error('請將群組名稱填寫完整')
+      if (!user) throw new Error('您沒有權限於該帳號新增群組')
+
+      const addGp = await Group.create({
+        gpName,
+        gpCreater: user.name,
+        gpMembers: [user.name, gpMemberName]
+      })
+      if (!addGp) throw new Error('發生了點錯誤，新增群組失敗')
+
+      res.json({ status: "success", message: "已新增群組" })
+    } catch (error) {
+      next(error)
+      console.log('error', error)
+    }
   }
 }
 

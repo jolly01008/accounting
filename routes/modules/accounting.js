@@ -8,5 +8,6 @@ router.delete('/:userId/:gpId/:recordId/deleteRecord', authenticated, accounting
 router.put('/:userId/:gpId/:recordId/putRecord', authenticated, accountingController.putRecord)
 router.post('/:userId/:gpId/countRecord', authenticated, accountingController.countRecord)
 router.post('/:userId/:gpId/addRecord', authenticated, accountingController.addRecord)
+router.post('/:userId/addGroup', authenticated, accountingController.addGroup)
 
 module.exports = router
