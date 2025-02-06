@@ -139,10 +139,10 @@ const accountingController = {
       const user = await User.findById(userId)
       const addMember = await User.findOne({ name: gpMemberName })
 
-      if (String(user.name) === String(gpMemberName)) throw new Error('群組成員不能填寫自己')
-      if (!addMember) throw new Error('沒有這名使用者，請確認填寫的成員名字是否正確')
       if (!gpMemberName) throw new Error('請填寫一名群組成員')
       if (!gpName) throw new Error('請將群組名稱填寫完整')
+      if (!addMember) throw new Error('沒有這名使用者，請確認填寫的成員名字是否正確')
+      if (String(user.name) === String(gpMemberName)) throw new Error('群組成員不能填寫自己')
       if (!user) throw new Error('您沒有權限於該帳號新增群組')
 
       const addGp = await Group.create({
