@@ -1,0 +1,44 @@
+version: '3'
+
+services:
+  mongo:
+    build:
+      context: ./accounting_db
+    container_name: mongo-con
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=example
+    volumes:
+      - mongo-data:/data/db
+    ports:
+      - "27017:27017"
+    networks:
+      - accounting-network-bridge
+  backend:
+    container_name: accounting-backend-con
+    build:
+      context: .
+    image: accounting:latest
+    ports:
+      - "3001:3001"
+    depends_on:
+      - mongo
+    environment:
+      - MONGOOSE_URI=mongodb://root:example@mongo:27017/accounting?authSource=admin
+    networks:
+      - accounting-network-bridge
+  frontend:
+    container_name: accounting-frontend-con
+    build:
+      context: ../accounting-frontend
+    image: accounting-frontend:latest
+    ports:
+      - "3000:3000"
+    networks:
+      - accounting-network-bridge
+
+networks:
+  accounting-network-bridge:
+    driver: bridge
+volumes:
+  mongo-data:

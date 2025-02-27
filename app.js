@@ -47,8 +47,7 @@ db.once('open', () => {
   console.log('mongoDB connected!')
 })
 
-httpServer.listen(PORT, '127.0.0.1', () => {
+httpServer.listen(PORT, '0.0.0.0', () => {
   console.log(`App is running on http://localhost:${PORT}`)
 })
 
-// 第二個參數 ('127.0.0.1'): 這指定了服務綁定的 IP 地址。

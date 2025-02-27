@@ -9,6 +9,7 @@ const accountingController = {
 
       const currentUser = await User.findById(userId)
       const group = await Group.findById(gpId)
+      if (!recordData.item || !recordData.lender || !recordData.borrower || !recordData.price || !recordData.time) throw new Error('所有欄位皆需填寫完整')
       if (!currentUser) throw new Error('沒有找到該使用者')
       if (!group) throw new Error('沒有找到該群組')
       if (recordData.lender === recordData.borrower) throw new Error('借出者與欠款者不得為同一人')
@@ -54,7 +55,7 @@ const accountingController = {
 
       if (userOneLendMoney > userTwoLendMoney) result = `${userTwoName} 尚須還 ${userOneName} : ${userOneLendMoney - userTwoLendMoney} 元`
       if (userOneLendMoney < userTwoLendMoney) result = `${userOneName} 尚須還 ${userTwoName} : ${userTwoLendMoney - userOneLendMoney} 元`
-      if (userOneLendMoney === userTwoLendMoney) result = `${userOneLendMoney}與${userTwoLendMoney} 互不相欠款`
+      if (userOneLendMoney === userTwoLendMoney) result = `${userOneLendMoney}元 vs ${userTwoLendMoney}元。因此 ${userOneName} 與 ${userTwoName} 互不相欠款`
 
       const resultData = {
         [userOneName]: userOneLendMoney,
