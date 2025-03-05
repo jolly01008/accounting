@@ -5,7 +5,7 @@
 語言與框架：Node.js、Express  
 雙向通訊：Socket.io 聊天室。基於 WebSocket，提供了房間管理、即時消息傳遞、廣播的相關事件處理。  
 資料庫：MongoDB  
-身份認證：JWT（JSON Web Token）
+身份認證：JWT（JSON Web Token）  
 容器化技術 : Docker
 
 ## 專案介紹
@@ -22,39 +22,45 @@
 - 帳號管理：
   - 註冊與登入：未登入時，用戶可註冊及登入帳號。登入後，根據用戶帳號展示現有群組及相關功能。
   - 登出：用戶可隨時登出帳號，退出後無法使用相關功能，直到重新登入。  
-- 群組管理：用戶可以建立群組，並填寫一名用戶加入群組。可將群組頁面連結分享給對方，與對方一起記帳。  
+- 群組管理：用戶可以建立群組，填寫另一位「用戶名字( name )」以創建群組。可將群組連結分享給對方，與對方一起記帳。  
 - 記錄管理：可以新增、編輯和刪除借出、欠款紀錄。包含項目、價格、時間。  
 - 欠款計算：結算單一群組的全部紀錄，計算最終的欠款金額，顯示誰欠誰多少錢。  
 - 即時聊天：點擊傳訊息給對方，若雙方都在線，支持實時文字發送聊天訊息，便於討論和協商。
 
-## 畫面截圖
+## 畫面截圖與功能演示
 
 ![image](https://github.com/jolly01008/accounting/blob/main/public/readmeImage/image01.png)
+(使用者個人頁面，可以看到創建的群組)
 
 ![image](https://github.com/jolly01008/accounting/blob/main/public/readmeImage/image02.png)
+(新增群組，需填寫另一名使用者的 name)
 
 ![image](https://github.com/jolly01008/accounting/blob/main/public/readmeImage/image03.png)
+(記帳畫面，點擊結算全部可得知雙方欠款結果)
 
-![image](https://github.com/jolly01008/accounting/blob/main/public/readmeImage/image04.png)
+![image](https://github.com/jolly01008/accounting/blob/main/public/readmeImage/gif01.gif)
+(能複製分享連結給群組成員，一起編輯記帳)
 
-![image](https://github.com/jolly01008/accounting/blob/main/public/readmeImage/image05.png)
-
-![image](https://github.com/jolly01008/accounting/blob/main/public/readmeImage/image06.png)
+![image](https://github.com/jolly01008/accounting/blob/main/public/readmeImage/gif02.gif)
+(點擊 傳訊息給對方 能上線聊天，皆在線時可以即時溝通交流)
 
 ## 共用帳號
 
 - 第一組 user 帳號
 
+  - name: user1
   - email: user1@example.com
   - password: 12345678
 
 - 第二組 user 帳號
 
+  - name: user2
   - email: user2@example.com
   - password: 12345678
 
 - 第三組 user 帳號
 
+  - name: user3
   - email: user3@example.com
   - password: 12345678
 
