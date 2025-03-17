@@ -30,19 +30,19 @@
 ## 畫面截圖與功能演示
 
 ![image](https://github.com/jolly01008/accounting/blob/main/public/readmeImage/image01.png)
-(使用者個人頁面，可以看到創建的群組)
+( 使用者個人頁面，可以看到創建的群組 )  
 
 ![image](https://github.com/jolly01008/accounting/blob/main/public/readmeImage/image02.png)
-(新增群組，需填寫另一名使用者的 name)
+( 新增群組，需填寫另一名使用者的 name )  
 
 ![image](https://github.com/jolly01008/accounting/blob/main/public/readmeImage/image03.png)
-(記帳畫面，點擊結算全部可得知雙方欠款結果)
+( 記帳畫面，點擊「結算全部」可得知雙方欠款結果 )  
 
 ![image](https://github.com/jolly01008/accounting/blob/main/public/readmeImage/gif01.gif)
-(能複製分享連結給群組成員，一起編輯記帳)
+( 能複製分享連結給群組成員，一起編輯記帳 )  
 
 ![image](https://github.com/jolly01008/accounting/blob/main/public/readmeImage/gif02.gif)
-(點擊 傳訊息給對方 能上線聊天，皆在線時可以即時溝通交流)
+( 點擊「傳訊息給對方」能上線聊天，皆在線時可以即時溝通交流 )
 
 ## 共用帳號
 
