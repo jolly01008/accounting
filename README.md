@@ -29,20 +29,20 @@
 
 ## 畫面截圖與功能演示
 
-![image](https://github.com/jolly01008/accounting/blob/main/public/readmeImage/image01.png)
-( 使用者個人頁面，可以看到創建的群組 )  
-
+![image](https://github.com/jolly01008/accounting/blob/main/public/readmeImage/image01.png)  
+( 使用者個人頁面，可以看到創建的群組 ▲ )  
+  
 ![image](https://github.com/jolly01008/accounting/blob/main/public/readmeImage/image02.png)
-( 新增群組，需填寫另一名使用者的 name )  
-
+( 新增群組，需填寫另一名使用者的 name ▲ )  
+  
 ![image](https://github.com/jolly01008/accounting/blob/main/public/readmeImage/image03.png)
-( 記帳畫面，點擊「結算全部」可得知雙方欠款結果 )  
-
+( 記帳畫面，點擊「結算全部」可得知雙方欠款結果 ▲ )  
+  
 ![image](https://github.com/jolly01008/accounting/blob/main/public/readmeImage/gif01.gif)
-( 能複製分享連結給群組成員，一起編輯記帳 )  
-
+( 能複製分享連結給群組成員，一起編輯記帳 ▲ )  
+  
 ![image](https://github.com/jolly01008/accounting/blob/main/public/readmeImage/gif02.gif)
-( 點擊「傳訊息給對方」能上線聊天，皆在線時可以即時溝通交流 )
+( 點擊「傳訊息給對方」能上線聊天，皆在線時可以即時溝通交流 ▲ )
 
 ## 共用帳號
 
@@ -84,11 +84,26 @@ cd accounting-project
 
 ```
 
-2. 克隆後端專案
-git clone <https://github.com/jolly01008/accounting>
+2. 克隆後端專案 <https://github.com/jolly01008/accounting>
+```
+git clone https://github.com/jolly01008/accounting.git
+```
 
-3. 克隆前端專案
-git clone <https://github.com/jolly01008/accounting-frontend>
+3. 克隆前端專案 <https://github.com/jolly01008/accounting-frontend>
+```
+git clone https://github.com/jolly01008/accounting-frontend.git 
+```
+
+
+## 環境變數設置
+
+1. 在後端專案資料夾（accounting）中，將 `.env.example` 檔案複製一份，並將新檔案重新命名為 `.env`。
+
+2. 打開 `.env` 檔案，並設置 `JWT_SECRET` 環境變數，例如：
+
+```
+JWT_SECRET=SecretExample
+```
 
 ## 使用 Docker Compose 啟用容器
 
@@ -134,15 +149,28 @@ docker container ls
 
 ```
 
-如果容器未啟動或出現問題，可以重啟容器：
+6. 如果有容器未啟用成功，可用以下指令，先查找容器的 ID。
+```
+
+docker container ls -a 
+
+```
+
+查看指定容器的日誌，確認是否有錯誤。其中 [container ID] 是容器的 ID，
+```
+
+docker container logs [container ID]
+
+```
+
+如果需要，可以嘗試重啟容器：
 ```
 
 docker container restart [container ID]
 
 ```
-其中 [container ID] 是容器的 ID，也可以通過 docker container ls -a 查找到。
 
-6. 打開瀏覽器並訪問這個頁面 : <http://localhost:3000/signin> 
+7. 打開瀏覽器並訪問這個頁面 : <http://localhost:3000/signin> 
 
 可以登入第一組帳號，開始使用
  - email: user1@example.com

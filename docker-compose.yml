@@ -23,6 +23,8 @@ services:
       - "3001:3001"
     depends_on:
       - mongo
+    environment:
+       - MONGOOSE_URI=mongodb://root:example@mongo:27017/accounting?authSource=admin
     networks:
       - accounting-network-bridge
   frontend:
